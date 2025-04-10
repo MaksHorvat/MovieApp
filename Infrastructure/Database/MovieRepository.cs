@@ -1,7 +1,7 @@
 ﻿using Domain;
 using Domain.Interfaces;
 
-namespace Infrastructure.Persistance
+namespace Infrastructure.Database
 {
     public class MovieRepository : IMovieRepository
     {

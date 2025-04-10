@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Interfaces;
-using Infrastructure.Persistance;
+using Infrastructure.Database;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

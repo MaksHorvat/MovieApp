@@ -8,13 +8,13 @@
         public string PosterUrl { get; private set; }
         public string Overview { get; private set; }
         public string Genres { get; private set; } // TODO: Comma-separated genres
-        public decimal Rating { get; private set; }
+        public int Rating { get; private set; }
         public int? Runtime { get; private set; } // Runtime in minutes
         public string Language { get; private set; }
 
         private Movie() { }
 
-        public Movie(string title, DateTime releaseDate, string posterUrl, string overview, string genres, decimal rating, int? runtime, string language)
+        public Movie(string title, DateTime releaseDate, string posterUrl, string overview, string genres, int rating, int? runtime, string language)
         {
             // TODO: (Guard clauses)
             Title = title;
