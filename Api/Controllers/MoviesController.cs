@@ -59,14 +59,14 @@ namespace Api.Controllers
         }
 
         // GET /movies/{id}?api_key=YOUR_KEY
-        [HttpGet("{id:int}")] 
+        [HttpGet("{id:Guid}")]
         [ProducesResponseType(typeof(MovieDetailDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> GetMovieDetails(int id)
+        public async Task<IActionResult> GetMovieDetails(Guid id)
         {
-            if (id <= 0)
+            if (id == Guid.Empty)
             {
                 return BadRequest("Invalid Movie ID.");
             }

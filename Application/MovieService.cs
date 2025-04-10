@@ -15,7 +15,7 @@ namespace Application
             _movieRepository = movieRepository;
         }
 
-        public async Task<MovieDetailDto?> GetMovieByIdAsync(int id)
+        public async Task<MovieDetailDto?> GetMovieByIdAsync(Guid id)
         {
             var movie = await _movieRepository.GetByIdAsync(id);
             if (movie == null)
@@ -31,10 +31,10 @@ namespace Application
         public async Task<PagedResultDto<PopularMovieDto>> GetPopularMoviesAsync(int page, int pageSize)
         {
             var totalCount = await _movieRepository.GetPopularMoviesCountAsync();
-            var movies = _movieRepository.GetPopularMoviesAsync(page, pageSize);
+            var movies = _movieRepository.GetPopularMovies(page, pageSize).ToList();
             //TODO: handling errors
 
-            var movieDtos = movies.Adapt<IEnumerable<PopularMovieDto>>();
+            var movieDtos = movies.Select(movie => movie.Adapt<PopularMovieDto>()).ToList();
 
             return new PagedResultDto<PopularMovieDto>
             {
@@ -49,7 +49,7 @@ namespace Application
         public async Task<PagedResultDto<SearchedMovieDto>> SearchMoviesAsync(string query, string? sortBy, string? filter, int page, int pageSize)
         {
             var totalCount = await _movieRepository.GetSearchMoviesCountAsync(query, filter);
-            var movies = _movieRepository.SearchMoviesAsync(query, sortBy, filter, page, pageSize);
+            var movies = _movieRepository.SearchMovies(query, sortBy, filter, page, pageSize);
 
             var movieDtos = movies.Adapt<IEnumerable<SearchedMovieDto>>();
 

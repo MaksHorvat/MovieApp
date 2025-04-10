@@ -15,12 +15,12 @@ namespace Infrastructure.Database
             _context = context;
         }
 
-        public async Task<Movie?> GetByIdAsync(int id)
+        public async Task<Movie?> GetByIdAsync(Guid id)
         {
             return await _context.Movies.FindAsync(id);
         }
 
-        public IQueryable<Movie> GetPopularMoviesAsync(int page, int pageSize)
+        public IQueryable<Movie> GetPopularMovies(int page, int pageSize)
         {
             return _context.Movies
                 .OrderByDescending(m => m.Rating)
@@ -46,7 +46,7 @@ namespace Infrastructure.Database
             return await queryable.CountAsync();
         }
 
-        public IQueryable<Movie> SearchMoviesAsync(string query, string? sortBy, string? filter, int page, int pageSize)
+        public IQueryable<Movie> SearchMovies(string query, string? sortBy, string? filter, int page, int pageSize)
         {
             var queryable = _context.Movies.AsQueryable();
 
