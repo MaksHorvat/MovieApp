@@ -1,0 +1,93 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Visual Studio cache files
+*.VC.db
+*.VC.opendb
+
+# Test Results
+*.trx
+*.testresults
+
+# MSTest
+TestResults/
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Build logs
+*.log
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+coverage/
+*.gcov
+*.gcda
+*.gcno
+*.lcov
+coverage.json
+coverage.info
+coverage.opencover.xml
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Rider
+.idea/
+*.sln.iml
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# dotnet tools
+.dotnet/
+
+# DLL files
+*.dll
+*.exe
+*.pdb
+*.cache
+*.ilk
+*.manifest
+*.userprefs
+
+# MacOS files
+.DS_Store
+
+# Logs
+logs/
+*.log
