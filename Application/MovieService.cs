@@ -24,23 +24,13 @@ namespace Application
             }
 
             var movieDto = movie.Adapt<MovieDetailDto>();
-            // Handle specific mapping logic if needed (like FullPosterUrl, Genres split) in the profile or here
-            // movieDto.FullPosterUrl = $"https://your-image-base-url.com{movie.PosterUrl}"; // If not handled by AutoMapper profile
-            // movieDto.Genres = movie.Genres?.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries) ?? Enumerable.Empty<string>(); // If not handled
             return movieDto;
 
         }
 
         public async Task<PagedResultDto<PopularMovieDto>> GetPopularMoviesAsync(int page, int pageSize)
         {
-            // Clamp pageSize if needed, calculate total items needed considering the MaxPopularMovies limit
-            // Note: The requirement asks for *Top 50*. This usually means the first 50 overall.
-            // If the user asks for page 3 with pageSize 20, they shouldn't get movies ranked 41-60 if only top 50 are "popular".
-            // However, the prompt also asks for pagination *on* the popular endpoint. This implies the *source* list might be larger,
-            // but we order by popularity and paginate through that ordered list. Let's implement standard pagination on the ordered list.
-            // The "Top 50" might be interpreted as the client should ideally only fetch page 1/2/3 depending on page size to get the top 50.
-
-            var totalCount = await _movieRepository.GetPopularMoviesCountAsync(); // Get total count for pagination info
+            var totalCount = await _movieRepository.GetPopularMoviesCountAsync();
             var movies = _movieRepository.GetPopularMoviesAsync(page, pageSize);
             //TODO: handling errors
 

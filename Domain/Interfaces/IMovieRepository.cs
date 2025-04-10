@@ -2,7 +2,7 @@
 {
     public interface IMovieRepository
     {
-        Task<Movie> GetByIdAsync(int id);
+        Task<Movie?> GetByIdAsync(int id);
         IQueryable<Movie> GetPopularMoviesAsync(int page, int pageSize);
         Task<int> GetPopularMoviesCountAsync();
         Task<int> GetSearchMoviesCountAsync(string query, string? filter);

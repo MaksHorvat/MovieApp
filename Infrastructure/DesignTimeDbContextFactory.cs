@@ -9,11 +9,13 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<Applicatio
 {
     public ApplicationDbContext CreateDbContext(string[] args)
     {
-        var basePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Api");
+        var basePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\..\\Api"));
 
         IConfigurationRoot config = new ConfigurationBuilder()
             .SetBasePath(basePath)
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.Development.json", optional: true, reloadOnChange: true)
+            .AddEnvironmentVariables()
             .Build();
 
         var connectionString = config.GetConnectionString("MoviesDB");

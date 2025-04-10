@@ -39,7 +39,7 @@ namespace Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> SearchMovies(
-            [FromQuery(Name = "query")] string searchQuery, // Changed name to avoid conflict with query keyword
+            [FromQuery(Name = "query")] string searchQuery,
             [FromQuery] string? sortBy,
             [FromQuery] string? filter,
             [FromQuery] int page = 1,
@@ -59,7 +59,7 @@ namespace Api.Controllers
         }
 
         // GET /movies/{id}?api_key=YOUR_KEY
-        [HttpGet("{id:int}")] // Route constraint for integer ID
+        [HttpGet("{id:int}")] 
         [ProducesResponseType(typeof(MovieDetailDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
