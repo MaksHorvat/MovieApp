@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence;
@@ -15,5 +16,6 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly); //Here the db configuration are applied
+        MovieSeeder.Seed(modelBuilder);
     }
 }
