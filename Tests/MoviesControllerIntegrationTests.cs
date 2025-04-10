@@ -11,6 +11,7 @@ using Tests.Helpers;
 public class MoviesControllerIntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient _client;
+    private const string ValidApiKey = "test-api-key"; 
 
     public MoviesControllerIntegrationTests(WebApplicationFactory<Program> factory)
     {
@@ -33,6 +34,8 @@ public class MoviesControllerIntegrationTests : IClassFixture<WebApplicationFact
             var db = scopedServices.GetRequiredService<ApplicationDbContext>();
             db.Database.EnsureCreated();
             TestDataSeeder.Seed(db);
+
+            Environment.SetEnvironmentVariable("ALLOWED_API_KEYS", ValidApiKey);
         });
     }).CreateClient();
     }
@@ -42,7 +45,7 @@ public class MoviesControllerIntegrationTests : IClassFixture<WebApplicationFact
     {
         var movieId = "0d297f3c-b3fd-4425-9f34-a028c463e27c";
 
-        var response = await _client.GetAsync($"/api/movies/{movieId}");
+        var response = await _client.GetAsync($"/api/movies/{movieId}?api_key={ValidApiKey}");
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -54,7 +57,7 @@ public class MoviesControllerIntegrationTests : IClassFixture<WebApplicationFact
     [Fact]
     public async Task GetPopularMovies_ReturnsPagedResults()
     {
-        var response = await _client.GetAsync("/api/movies/popular?page=1&pageSize=10");
+        var response = await _client.GetAsync($"/api/movies/popular?page=1&pageSize=10&api_key={ValidApiKey}");
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -67,7 +70,7 @@ public class MoviesControllerIntegrationTests : IClassFixture<WebApplicationFact
     [Fact]
     public async Task SearchMovies_ReturnsFilteredResults()
     {
-        var response = await _client.GetAsync("/api/movies/search?query=Popular&page=1&pageSize=10");
+        var response = await _client.GetAsync($"/api/movies/search?query=Popular&page=1&pageSize=10&api_key={ValidApiKey}");
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 

@@ -1,5 +1,6 @@
 
 using Api.Extensions;
+using Api.Middleware;
 
 namespace Api
 {
@@ -27,6 +28,8 @@ namespace Api
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
+
+            app.UseMiddleware<ApiKeyMiddleware>();
 
             app.Run();
         }
